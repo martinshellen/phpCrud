@@ -2,8 +2,16 @@
 
 switch($_REQUEST['acao']) {
     case 'cadastrar':
+
+        //verifica se o campo 'nome_categoria' está em branco
+        if (empty($_POST['nome_categoria'])) {
+            print "<script>alert('O campo Nome da Categoria não pode ficar em branco.');</script>";
+            print "<script>location.href='?page=categoria-listar';</script>";
+        } else {
         $sql = "INSERT INTO categoria (nome_categoria)
         VALUES ('".$_POST['nome_categoria']."')";
+
+        }
 
         $res = $conn ->query($sql);
         if($res==true) {
