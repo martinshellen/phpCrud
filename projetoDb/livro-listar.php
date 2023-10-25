@@ -1,30 +1,58 @@
-<h1>Listar Livro</h1>
+<h1>Listar Livros</h1>
 
-<div class="container col-md-12">
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table caption-top">
-          <thead>
-            <tr>
-              <th scope="col">Título</th>
-              <th scope="col">Autor</th>
-              <th scope="col">Editora</th>
-              <th scope="col">Local</th>
-              <th scope="col">Ano</th>
-            </tr>
-          </thead>
+<?php
+// Consulta SQL para listar os livros
+$sql = "SELECT * 
+FROM biblioteca.livro 
+inner join biblioteca.categoria ON livro.categoria_id_categoria = categoria.id_categoria;";
+$res = $conn->query($sql);
+$qtd = $res->num_rows;
+// Verifica se foram encontrados resultados
+if ($qtd > 0) {
+    // Exibe a quantidade de livros encontrados
+    print "<p>Encontrou <b>$qtd</b> Livro(s)</p>";
+    // Tabela para exibir os resultados
+    print "<table class='table table-bordered table-striped table-hover'>";
+    print "<tr>";
+    // Cabeçalhos das colunas da tabela
+    print "<th>#</th>";
+    print "<th>Título</th>";
+    print "<th>Autor</th>";
+    print "<th>Edição</th>";
+    print "<th>Editora</th>";
+    print "<th>Local</th>";
+    print "<th>Ano de Publicação</th>";
+    print "<th>Categoria</th>";
+    print "<th>Ações</th>";
+    print "</tr>";
 
-          <tbody id="tabela-body"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    // Loop para exibir cada registro
+    while ($row = $res->fetch_object()) {
+        print "<tr>";
+        print "<td>" . $row->id_livro . "</td>";
+        print "<td>" . $row->titulo_livro . "</td>";
+        print "<td>" . $row->autor_livro . "</td>";
+        print "<td>" . $row->edicao_livro . "</td>";
+        print "<td>" . $row->editora_livro . "</td>";
+        print "<td>" . $row->localidade_livro . "</td>";
+        print "<td>" . $row->ano_livro . "</td>";
+        print "<td>" . $row->nome_categoria . "</td>";
 
-   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-   <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-    integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-    crossorigin="anonymous"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="./bootstrap-3.4.1-dist/js/bootstrap.min.js"
-    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
-    crossorigin="anonymous"></script>
+        // Coluna com botões de ação (Editar e Excluir)
+        print "<td>
+        <button onclick=\"location.href='?page=livro-editar&id_livro=" . $row->id_livro . "';\"
+        class='btn btn-success'>Editar</button>
+
+        <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){location.href='?page=livro-salvar&acao=excluir&id_livro=" . $row->id_livro . "';}else{false;}\" class='btn btn-danger'>Excluir</button>
+
+        </td>";
+
+        print "</tr>";
+    }
+    print "</table>";
+} else {
+    // Mensagem exibida se não forem encontrados resultados
+    print "<p>Não encontrou resultados</p>";
+}
+
+?>

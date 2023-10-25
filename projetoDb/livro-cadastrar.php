@@ -1,85 +1,151 @@
 <h1>Cadastrar Livro</h1>
+<hr>
 
+<?php
+// Conexão com o banco de dados e recuperando as categorias salvas no banco, na tabela de categorias
+$sql = "SELECT * FROM categoria";
+$res = $conn->query($sql);
+$qtd = $res->num_rows;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Cadastro</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Título da página -->
+    <title>Cadastro</title>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css" />
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-    <![endif]-->
-
-  <script src="javaScript/cadastroProduto.js"></script>
+    <!-- Incluindo o CSS do Bootstrap -->
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css" />
 </head>
 
-<body onload="onLoad();">
+<body>
+    <!-- Formulário de cadastro de livro -->
+    <form id="formulario" action="?page=livro-salvar" method="POST">
+        <!-- Campo oculto para ação de cadastro -->
+        <input type="hidden" name="acao" value="cadastrar">
 
-      <!-- Container -->
-      <div class="form-group row">
-        <div class="form-group col-md-5">
-          <label for="nome">Título</label>
-          <input type="text" class="form-control" id="titulo" placeholder="" />
+        <!-- Container para os campos do formulário -->
+        <div class="form-group row">
+            <!-- Campo para inserir o título do livro -->
+            <div class="form-group col-md-4">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" value="" maxlength="200" />
+            </div>
+
+            <!-- Campo para inserir o autor do livro -->
+            <div class="col-md-4">
+                <label for="autor">Autor</label>
+                <input type="text" class="form-control" id="autor" name="autor" placeholder="Autor do Livro" maxlength="45" />
+            </div>
         </div>
 
-        <div class="col-md-3">
-          <label for="codigo">Autor</label>
-          <input type="text" class="form-control" id="autor" placeholder="Autor do Livro" maxlength="50" />
+        <br>
+
+        <div class="form-group row">
+
+            <br>
+
+            <!-- Campo para inserir o autor do livro -->
+            <div class="col-md-3">
+                <label for="edicao">Edição</label>
+                <input type="text" class="form-control" id="edicao" name="edicao" placeholder="Edição" maxlength="3" />
+            </div>
+
+            <!-- Campo para inserir a editora do livro -->
+            <div class="col-md-3">
+                <label for="editora">Editora</label>
+                <input type="text" class="form-control" id="editora" name="editora" placeholder="Editora do Livro" maxlength="20" />
+            </div>
         </div>
 
-        <div class="form-group col-md-3">
-          <label for="precoCompra">Editora</label>
-          <input type="text" class="form-control" id="editora" placeholder="Editora do Livro" />
-        </div>
-      </div>
+        <br>
 
-      <div class="form-group row">
-        <div class="col-xs-5">
-          <label for="codigo">Local</label>
-          <input type="text" class="form-control" id="local" placeholder="" />
-        </div>
-      </div>
+        <div class="form-group row">
+            <!-- Campo para inserir o local do livro -->
+            <div class="col-md-3">
+                <label for="local">Local</label>
+                <input type="text" class="form-control" id="local" name="local" placeholder="" maxlength="20" />
+            </div>
 
-      <div class="form-group row">
-        <div class="col-xs-5">
-          <label for="codigo">Ano de Publicação</label>
-          <input type="text" class="form-control" id="ano" placeholder="" />
-        </div>
-      </div>
+            <!-- Campo para inserir o ano de publicação do livro -->
+            <div class="col-md-3">
+                <label for="ano">Ano de Publicação</label>
+                <input type="text" class="form-control" id="ano" name="ano" placeholder="Ex: 2023" />
+            </div>
 
-      <div class="row">
-        <div class="form-group col-xs-6">
-          <label for="obs">Observação:</label>
-          <textarea rows="10" type="" class="form-control" id="obs" placeholder="" maxlength="255">
-            </textarea>
+            <!-- Dropdown para selecionar a categoria do livro -->
+            <div class="col-md-3">
+                <label for="categoria">Categoria</label>
+                <select name="categoria" class="form-select">
+                    <option value="">Selecione uma categoria</option>
+                    <?php
+                    // Loop para listar as categorias do banco de dados
+                    while ($categoria = $res->fetch_object()) {
+                        echo "<option value='$categoria->id_categoria'>$categoria->nome_categoria</option>";
+                    }
+                    ?>
+                </select>
+            </div>
         </div>
-      </div>
 
-      <div class="row col-md-6">
-        <div class="form-group">
-          <button type="submit" onclick="cadastrarProduto();" class="btn btn-primary">
-            Cadastrar
-          </button>
-          <button type="button" onclick="limparFormulario();" class="btn btn-danger">
-            Limpar
-          </button>
+        <br>
+
+        <!-- Botões para cadastrar e limpar o formulário -->
+        <div class="row col-md-6">
+            <div class="form-group">
+                <button type="button" onclick="cadastrarLivro();" class="btn btn-success">
+                    Cadastrar
+                </button>
+                <button type="button" onclick="limparFormulario();" class="btn btn-danger">
+                    Limpar
+                </button>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- Fim container -->
-  </form>
+        <!-- Fim do container -->
+    </form>
 
+    <script>
+        // Função para limpar o formulário
+        function limparFormulario() {
+            var formulario = document.getElementById("formulario");
+            formulario.reset();
+        }
+
+        // Função para cadastrar um livro
+        function cadastrarLivro() {
+            var formulario = document.getElementById("formulario");
+            var titulo = document.getElementById("titulo").value;
+            var autor = document.getElementById("autor").value;
+            var editora = document.getElementById("editora").value;
+            var local = document.getElementById("local").value;
+            var ano = document.getElementById("ano").value;
+
+            if (titulo === "" || autor === "" || editora === "" || local === "" || ano === "") {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            // Objeto livro com os dados preenchidos
+            var livro = {
+                titulo: titulo,
+                autor: autor,
+                editora: editora,
+                local: local,
+                ano: ano,
+            };
+
+
+            //diferença entre  type button e submit
+            //button é burro vc tem que dá vida ao botão
+            //o submit ele vai submter o formulário ao ser clicado, então sempre oberve o action do formulario e method
+            formulario.submit();
+
+        }
+    </script>
 </body>
 
 </html>
