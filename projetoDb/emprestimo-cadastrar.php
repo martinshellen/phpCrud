@@ -3,26 +3,21 @@
 
 <?php
 
-// Consulta para obter os IDs de livro
 $sqlLivro = "SELECT id_livro , titulo_livro FROM livro";
 $resLivro = $conn->query($sqlLivro);
 
-// Consulta para obter os IDs de usuário
 $sqlUsuario = "SELECT id_usuario, nome_usuario FROM usuario";
 $resUsuario = $conn->query($sqlUsuario);
 
-// Consulta para obter os IDs de funcionário
 $sqlFuncionario = "SELECT id_funcionario, nome_funcionario FROM funcionario";
 $resFuncionario = $conn->query($sqlFuncionario);
 
-// Feche a conexão com o banco de dados quando terminar de usar as variáveis
 $conn->close();
 ?>
 
 <!-- Incluindo o CSS do Bootstrap -->
 <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css" />
 
-<!-- Formulário de cadastro de empréstimo -->
 <form id="formulario" action="?page=emprestimo-salvar" method="POST">
     <!-- Campo oculto para ação de cadastro -->
     <input type="hidden" name="acao" value="cadastrar">
@@ -32,7 +27,7 @@ $conn->close();
 
         <!-- Dropdown para selecionar o Livro -->
         <div class="col-md-4">
-            <label for="livro_id_livro">ID do Livro</label>
+            <label for="livro_id_livro">Livro</label>
             <select name="livro_id_livro" id="livro_id_livro" class="form-select">
                 <option value="">Selecione um ID</option>
                 <?php
@@ -43,9 +38,8 @@ $conn->close();
             </select>
         </div>
 
-        <!-- Dropdown para selecionar o Usuário -->
         <div class="col-md-3">
-            <label for="usuario_id_usuario">ID do Usuário</label>
+            <label for="usuario_id_usuario">Usuário</label>
             <select name="usuario_id_usuario" id="usuario_id_usuario" class="form-select">
                 <option value="">Selecione um ID</option>
                 <?php
@@ -56,9 +50,8 @@ $conn->close();
             </select>
         </div>
 
-        <!-- Dropdown para selecionar o Funcionário -->
         <div class="col-md-3">
-            <label for="funcionario_id_funcionario">ID do Funcionário</label>
+            <label for="funcionario_id_funcionario">Funcionário</label>
             <select name="funcionario_id_funcionario" id="funcionario_id_funcionario" class="form-select">
                 <option value="">Selecione um ID</option>
                 <?php
@@ -77,7 +70,6 @@ $conn->close();
                 <input type="date" class="form-control" id="data_emprestimo" name="data_emprestimo" />
             </div>
 
-            <!-- Campo para inserir a Data de Devolução -->
             <div class="col-md-4">
                 <label for="data_devolucao">Data de Devolução</label>
                 <input type="date" class="form-control" id="data_devolucao" name="data_devolucao" />

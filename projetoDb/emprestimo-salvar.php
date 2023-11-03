@@ -20,10 +20,10 @@ switch ($_REQUEST['acao']) {
 
         $res = $conn->query($sql);
         if ($res === true) {
-            echo "<script>alert('Cadastrou com sucesso!');</script>";
+            echo "<script>alert('Editou com sucesso!');</script>";
             echo "<script>location.href='?page=emprestimo-listar';</script>";
         } else {
-            echo "<script>alert('Não foi possível cadastrar');</script>";
+            echo "<script>alert('Não foi possível editar');</script>";
             echo "<script>location.href='?page=emprestimo-listar';</script>";
         }
         break;

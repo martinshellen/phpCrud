@@ -60,22 +60,22 @@ switch ($_REQUEST['acao']) {
         }
         break;
 
-    case 'excluir':
-        // Monta a consulta SQL para excluir um funcionário do banco de dados
-        $id_funcionario = $_REQUEST['id_usuario'];
-        $sql = "DELETE FROM usuario WHERE id_usuario = $id_usuario";
-        $res = $conn->query($sql);
-
-        // Verifica se a consulta foi executada com sucesso
-        if ($res === true) {
-            // Exibe um alerta de sucesso e redireciona para a página de listagem
-            print "<script>alert('Excluiu com sucesso!');</script>";
-            print "<script>location.href='?page=usuario-listar';</script>";
-        } else {
-            // Exibe um alerta de erro e redireciona para a página de listagem
-            print "<script>alert('Não foi possível excluir');</script>";
-            print "<script>location.href='?page=usuario-listar';</script>";
-        }
-        break;
+        case 'excluir':
+            // Monta a consulta SQL para excluir um usuário do banco de dados
+            $id_usuario = $_REQUEST['id_usuario']; // Corrigir o nome da variável aqui
+            $sql = "DELETE FROM usuario WHERE id_usuario = $id_usuario";
+            $res = $conn->query($sql);
+        
+            // Verifica se a consulta foi executada com sucesso
+            if ($res === true) {
+                // Exibe um alerta de sucesso e redireciona para a página de listagem
+                print "<script>alert('Excluiu com sucesso!');</script>";
+                print "<script>location.href='?page=usuario-listar';</script>";
+            } else {
+                // Exibe um alerta de erro e redireciona para a página de listagem
+                print "<script>alert('Não foi possível excluir');</script>";
+                print "<script>location.href='?page=usuario-listar';</script>";
+            }
+            break;
 }
 ?>

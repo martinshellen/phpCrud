@@ -1,3 +1,5 @@
+<h1>Editar Emprestimo</h1>
+
 <?php
 // Recuperar os dados do empréstimo a ser editado
 $sql = "SELECT * FROM emprestimo WHERE id_emprestimo=" . $_REQUEST['id_emprestimo'];
@@ -15,8 +17,6 @@ $resUsuario = $conn->query($sqlUsuario);
 // Consulta para obter os IDs de funcionário
 $sqlFuncionario = "SELECT id_funcionario, nome_funcionario FROM funcionario";
 $resFuncionario = $conn->query($sqlFuncionario);
-
-
 
 // Feche a conexão com o banco de dados quando terminar de usar as variáveis
 $conn->close();

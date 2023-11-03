@@ -1,5 +1,4 @@
 <h1>Editar Usuário</h1>
-<hr>
 
 <?php
 // Recuperar os dados do funcionário a ser editado
