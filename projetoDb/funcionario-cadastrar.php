@@ -98,14 +98,6 @@ $qtd = $res->num_rows;
                 return;
             }
 
-            // Objeto Funcionário com os dados preenchidos
-            var funcionario = {
-                nome: nome,
-                cpf: cpf,
-                email: email,
-                fone: fone,
-            };
-
             /* Diferença entre os tipos de botão:
                 O botão do tipo "button" não realiza a ação por padrão e você precisa adicionar a lógica para executar uma ação quando clicado.
                 O botão do tipo "submit" submeterá o formulário ao ser clicado, é importante observar as configurações do atributo "action" e "method"

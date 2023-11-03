@@ -9,10 +9,10 @@ switch ($_REQUEST['acao']) {
             print "<script>location.href='?page=usuario-listar';</script>";
         } else {
             // Monta a consulta SQL para inserir um novo funcionário no banco de dados
-            $sql = "INSERT INTO usuario (id_usuario, cpf_usuario, nome_usuario, data_nasc, email_usuario, fone_usuario)
+            $sql = "INSERT INTO usuario (cpf_usuario, nome_usuario, data_nasc, email_usuario, fone_usuario)
                 VALUES ('" . $_POST['cpf'] . "',
                         '" . $_POST['nome'] . "',
-                        '" . $_POST['dataNasc'] . "',
+                        '" . $_POST['data_nasc'] . "',
                         '" . $_POST['email'] . "',
                         '" . $_POST['fone'] . "')";
         }
@@ -33,7 +33,7 @@ switch ($_REQUEST['acao']) {
         // Recuperando dados do formulário
         $cpf = $_POST['cpf'];
         $nome = $_POST['nome'];
-        $dataNasc = $_POST['dataNasc'];
+        $data_nasc = $_POST['data_nasc'];
         $email = $_POST['email'];
         $fone = $_POST['fone'];
         $id_usuario = $_POST['id_usuario'];

@@ -21,7 +21,7 @@ print "</tr>";
 
 if ($qtd > 0) {
     // Exibe a contagem de categorias encontradas
-    print "<p>Encontrou <b>$qtd</b> usuários(s)</p>";
+    print "<p>Encontrou <b>$qtd</b> usuário(s)</p>";
 
     // Loop para exibir cada registro
     while ($row = $res->fetch_object()) {
@@ -31,7 +31,7 @@ if ($qtd > 0) {
         print "<td>" . $row->cpf_usuario . "</td>"; // Coluna com o nome do funcionário
         print "<td>" . $row->nome_usuario . "</td>"; // Coluna com o nome do funcionário
         print "<td>" . $row->data_nasc . "</td>"; // Coluna com o email do funcionário
-        print "<td>" . $row->email_funcionario . "</td>"; // Coluna com o CPF do funcionário
+        print "<td>" . $row->email_usuario . "</td>"; // Coluna com o CPF do funcionário
         print "<td>" . $row->fone_usuario . "</td>"; // Coluna com o telefone do funcionário
 
         // Coluna com botões de ação (Editar e Excluir)

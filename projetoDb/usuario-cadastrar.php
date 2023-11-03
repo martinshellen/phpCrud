@@ -52,8 +52,8 @@ $qtd = $res->num_rows;
 
             <!-- Campo para inserir o email do Funcionário -->
             <div class="col-md-3">
-                <label for="dataNasc">Data de Nascimento</label>
-                <input type="text" class="form-control" id="dataNasc" name="dataNasc" placeholder="Digite sua data de nascimento" />
+                <label for="data_nasc">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nasc" name="data_nasc" placeholder="Digite sua data de nascimento" />
             </div>
 
             <!-- Campo para inserir o telefone do Funcionário -->
@@ -97,23 +97,14 @@ $qtd = $res->num_rows;
             var formulario = document.getElementById("formulario");
             var cpf = document.getElementById("cpf").value;
             var nome = document.getElementById("nome").value;
-            var dataNasc = document.getElementById("dataNasc").value;
+            var data_nasc = document.getElementById("data_nasc").value;
             var email = document.getElementById("email").value;
             var fone = document.getElementById("fone").value;
 
-            if (cpf === "" || nome === "" || dataNasc === "" || email === "" || fone === "") {
+            if (cpf === "" || nome === "" || data_nasc === "" || email === "" || fone === "") {
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-
-            // Objeto Funcionário com os dados preenchidos
-            var usuario = {
-                cpf: cpf,
-                nome: nome,
-                dataNasc: dataNasc,
-                email: email,
-                fone: fone,
-            };
 
             /* Diferença entre os tipos de botão:
                 O botão do tipo "button" não realiza a ação por padrão e você precisa adicionar a lógica para executar uma ação quando clicado.

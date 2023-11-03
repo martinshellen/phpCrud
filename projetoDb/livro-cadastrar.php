@@ -5,7 +5,6 @@
 // Conexão com o banco de dados e recuperando as categorias salvas no banco, na tabela de categorias
 $sql = "SELECT * FROM categoria";
 $res = $conn->query($sql);
-$qtd = $res->num_rows;
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +31,7 @@ $qtd = $res->num_rows;
         <div class="form-group row">
             <!-- Campo para inserir o título do livro -->
             <div class="form-group col-md-4">
-                <label for="titulo">Título</label>
+                <label for="titulo">Título do livro</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" value="" maxlength="200" />
             </div>
 
@@ -128,16 +127,6 @@ $qtd = $res->num_rows;
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-
-            // Objeto livro com os dados preenchidos
-            var livro = {
-                titulo: titulo,
-                autor: autor,
-                editora: editora,
-                local: local,
-                ano: ano,
-            };
-
 
             //diferença entre  type button e submit
             //button é burro vc tem que dá vida ao botão

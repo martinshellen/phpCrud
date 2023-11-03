@@ -6,6 +6,6 @@
         <input type="text" name="nome_categoria" class="form-control">
     </div>
     <div class="mb-3">
-        <button type="submit" class="btn btn-success">Enviar</button>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
     </div>
 </form>
